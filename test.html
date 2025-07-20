@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gateway Redirector Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-link {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            cursor: pointer;
+        }
+        .test-link:hover {
+            background: #e0e0e0;
+        }
+        .protocol-link {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gateway Redirector Extension Test</h1>
+    <p>An extension by <a href="https://ndujalabs.com" target="_blank">ndujaLabs</a></p>
+
+    <div id="status"></div>
+
+    <h2>Test Links:</h2>
+
+    <h3>Arweave URLs:</h3>
+    <a href="ar://iyP62-Rs8uwBTCDjIkEzvjATIWqeKyiU2Kpqhso0AyA" class="test-link protocol-link" data-protocol="ar" target="_blank">
+        ar://iyP62-Rs8uwBTCDjIkEzvjATIWqeKyiU2Kpqhso0AyA (Hoody.webp)
+    </a>
+
+    <a href="ar://Jx9u0KHVzFA2LOA0ox8HN9WDN2CjWk9aXhb7ttUqvaw/Nalaputh.webp" class="test-link protocol-link" data-protocol="ar" target="_blank">
+        ar://Jx9u0KHVzFA2LOA0ox8HN9WDN2CjWk9aXhb7ttUqvaw/Nalaputh.webp (Nalaputh.webp)
+    </a>
+
+    <h3>IPFS URLs:</h3>
+    <a href="ipfs://QmdMPYwsTDs2snxzGAUAtBkivsDh8932GUQgTuayNygdsQ/BrokenJazz24.mp4" class="test-link protocol-link" data-protocol="ipfs" target="_blank">
+        ipfs://QmdMPYwsTDs2snxzGAUAtBkivsDh8932GUQgTuayNygdsQ/BrokenJazz24.mp4 (BrokenJazz24.mp4)
+    </a>
+
+    <h2>Manual Test:</h2>
+    <p>Type a protocol URL and click "Test":</p>
+    <input type="text" id="testUrl" placeholder="ar://your-id-here or ipfs://your-hash-here" style="width: 100%; padding: 8px; margin: 5px 0;">
+    <button onclick="testUrl()" style="padding: 8px 16px; margin: 5px 0;">Test URL</button>
+
+    <h2>Instructions:</h2>
+    <ol>
+        <li>Make sure the Gateway Redirector extension is loaded and enabled</li>
+        <li>Click on any of the test links above</li>
+        <li>The extension should redirect the URL to the appropriate gateway</li>
+        <li>Check the browser console for debug messages</li>
+    </ol>
+
+    <h2>Manual Testing:</h2>
+    <p>You can also manually type these URLs in the address bar:</p>
+    <ul>
+        <li><code>ar://iyP62-Rs8uwBTCDjIkEzvjATIWqeKyiU2Kpqhso0AyA</code></li>
+        <li><code>ipfs://QmdMPYwsTDs2snxzGAUAtBkivsDh8932GUQgTuayNygdsQ/BrokenJazz24.mp4</code></li>
+    </ul>
+
+    <script>
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status');
+            statusEl.textContent = message;
+            statusEl.className = `status ${type}`;
+        }
+
+        function testUrl() {
+            const url = document.getElementById('testUrl').value.trim();
+            if (!url) {
+                showStatus('Please enter a URL', 'error');
+                return;
+            }
+
+            if (url.startsWith('ar://') || url.startsWith('ipfs://')) {
+                showStatus('Testing URL: ' + url, 'success');
+                // Try to navigate to the URL
+                window.location.href = url;
+            } else {
+                showStatus('URL must start with ar:// or ipfs://', 'error');
+            }
+        }
+
+        // Add click handlers for protocol links
+        document.addEventListener('DOMContentLoaded', function() {
+            const protocolLinks = document.querySelectorAll('.protocol-link');
+            protocolLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const url = this.href;
+                    console.log('Protocol link clicked:', url);
+                    showStatus('Clicked: ' + url, 'success');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
