@@ -94,6 +94,13 @@ No build process required! The extension works directly from source.
 
 MIT License - feel free to use and modify as needed!
 
+
 ## Support
 
 If you encounter any issues or have feature requests, please open an issue on GitHub.
+
+## Copyright
+
+Built by [@sullof](https://github.com/sullof) with the help of [Cursor](https://cursor.sh/) AI coding assistant.
+
+(c) 2025+ ndujaLabs
