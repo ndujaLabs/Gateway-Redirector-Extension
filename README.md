@@ -101,6 +101,5 @@ If you encounter any issues or have feature requests, please open an issue on Gi
 
 ## Copyright
 
-Built by [@sullof](https://github.com/sullof) with the help of [Cursor](https://cursor.sh/) AI coding assistant.
-
+Built with the help of [Cursor](https://cursor.sh/) AI coding assistant.  
 (c) 2025+ ndujaLabs
